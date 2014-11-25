@@ -26,6 +26,8 @@ module ActiveTriples
       # @raise [Exception] if for_class does not have base_uri configured
       # @raise [Exception] if an available local name is not found in the maximum allowed tries.
       #
+      # @note See README for examples passing in minter block.
+      #
       # @TODO This is inefficient if max_tries is large. Could try
       #    multi-threading. When using the default_minter included
       #    in this class, it is unlikely to be a problem and should
@@ -62,6 +64,8 @@ module ActiveTriples
       # @note Best practice is to begin localnames with an alpha character.  UUIDs can generate with an alpha or
       #   numeric as the first character.  Pass in an alpha character as <tt>:prefix</tt> to enforce this best
       #   practice.
+      #
+      # @note See README for example overriding default minter.
       #
       # @return [String] a uuid
       def self.default_minter( *options )

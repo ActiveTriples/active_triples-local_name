@@ -1,5 +1,6 @@
 # ActiveTriples::LocalName
 
+[![Build Status](https://travis-ci.org/ActiveTriples/active_triples-local_name.png?branch=master)](https://travis-ci.org/ActiveTriples/active_triples-local_name)
 
 Provides utilities for working with local names under the [ActiveTriples](https://github.com/ActiveTriples/ActiveTriples) 
 framework.  Includes a default implementation of a local name minter.
