@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = ActiveTriples::LocalName::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["E. Lynette Rayle"]
-  s.homepage    = 'https://github.com/no-reply/active_triples-local_name'
+  s.homepage    = 'https://github.com/ActiveTriples/active_triples-local_name'
   s.email       = 'elr37@cornell.edu'
   s.summary     = %q{Local name minter for ActiveTriples based resources.}
   s.description = %q{active_triples-local_name provides a standard interface and default implementation for a minter of the local name portion of a URI.}
