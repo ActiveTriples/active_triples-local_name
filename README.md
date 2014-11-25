@@ -99,6 +99,28 @@ localname = ActiveTriples::LocalName::Minter.generate_local_name(
 # => something like -- "http://example.org/d_method_59beebc5-5238-4aad-bf92-f63fbbd8faaa"
 ```
 
+#### Example: Override default minter.
+```ruby
+# minter method
+module ActiveTriples
+  module LocalName
+    class Minter
+      def self.default_minter( *options )
+        prefix = options[0][:prefix] if ! options.empty? && options[0].is_a?(Hash) && options[0].key?(:prefix)
+        local_name = SecureRandom.uuid
+        local_name = prefix + "_default_" + local_name if prefix && prefix.is_a?(String)
+        local_name
+      end
+    end
+  end
+end
+
+# create a new resource with a minted local name using override of default minter
+localname = ActiveTriples::LocalName::Minter.generate_local_name(
+              DummyResourceWithBaseURI,10,{:prefix=>"d"})
+# => something like -- "http://example.org/d_default_59beebc5-5238-4aad-bf92-f63fbbd8faaa"
+```
+
 See more examples in spec/active_triples/local_name/minter_spec.rb.
 
 

@@ -7,7 +7,8 @@ module ActiveTriples
     class Minter
 
       ##
-      # Generate a random ID that does not already exist in the triplestore.
+      # Generate a random localname that combined with a class' base_uri does not already exist in
+      # registered triplestores.
       #
       # @param [Class] the class inheriting from <tt>ActiveTriples::Reource</tt> whose configuration
       #   is used to generate the full URI for testing for uniqueness of the generated local name
