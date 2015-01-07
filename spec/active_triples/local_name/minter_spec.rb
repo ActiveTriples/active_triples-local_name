@@ -92,7 +92,7 @@ describe ActiveTriples::LocalName::Minter do
         it "should generate an ID using default minter function" do
           id = ActiveTriples::LocalName::Minter.generate_local_name(DummyResourceWithBaseURI)
           expect(id).to be_kind_of String
-          expect(id.length).to be 36
+          expect(id.length).to eq 36
           id.should match /[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}/
         end
       end
@@ -290,7 +290,7 @@ describe ActiveTriples::LocalName::Minter do
         it "should generate a prefixed ID" do
           id = ActiveTriples::LocalName::Minter.generate_local_name(DummyResourceWithBaseURI,10,{:prefix=>"s"})
           expect(id).to be_kind_of String
-          expect(id.length).to be 37
+          expect(id.length).to eq 37
           id.should match /s[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}/
         end
       end
@@ -299,7 +299,7 @@ describe ActiveTriples::LocalName::Minter do
         it "should generate ID ignoring prefix" do
           id = ActiveTriples::LocalName::Minter.generate_local_name(DummyResourceWithBaseURI,10,1)
           expect(id).to be_kind_of String
-          expect(id.length).to be 36
+          expect(id.length).to eq 36
           id.should match /[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}/
         end
       end
@@ -308,7 +308,7 @@ describe ActiveTriples::LocalName::Minter do
         it "should generate ID ignoring prefix" do
           id = ActiveTriples::LocalName::Minter.generate_local_name(DummyResourceWithBaseURI,10,{:prefix=>1.5})
           expect(id).to be_kind_of String
-          expect(id.length).to be 36
+          expect(id.length).to eq 36
           id.should match /[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}/
         end
       end
@@ -317,7 +317,7 @@ describe ActiveTriples::LocalName::Minter do
         it "should generate ID ignoring prefix" do
           id = ActiveTriples::LocalName::Minter.generate_local_name(DummyResourceWithBaseURI,10,{:prefix=>{"a"=>"b"}})
           expect(id).to be_kind_of String
-          expect(id.length).to be 36
+          expect(id.length).to eq 36
           id.should match /[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}/
         end
       end
@@ -326,7 +326,7 @@ describe ActiveTriples::LocalName::Minter do
         it "should generate ID ignoring prefix" do
           id = ActiveTriples::LocalName::Minter.generate_local_name(DummyResourceWithBaseURI,10,{:prefix=>[1,2,3]})
           expect(id).to be_kind_of String
-          expect(id.length).to be 36
+          expect(id.length).to eq 36
           id.should match /[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}/
         end
       end
