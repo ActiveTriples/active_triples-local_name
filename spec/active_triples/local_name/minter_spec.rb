@@ -86,8 +86,9 @@ describe ActiveTriples::LocalName::Minter do
 
       context "and all arguments are missing" do
         it "should raise error" do
+          # NOTE: ruby < 2 puts out (0 for 1); ruby >= 2 puts out (0 for 1+)
           expect{ ActiveTriples::LocalName::Minter.generate_local_name() }.
-              to raise_error(ArgumentError, 'wrong number of arguments (0 for 1)')
+              to raise_error(ArgumentError, /wrong number of arguments \(0 for 1\+?\)/)
         end
       end
 
