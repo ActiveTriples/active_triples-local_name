@@ -81,10 +81,54 @@ describe ActiveTriples::LocalName::Minter do
       ActiveTriples::Repositories.clear_repositories!
     end
 
-    context "when class doesn't have base_uri defined" do
-      it "should raise an Exception" do
-        expect{ ActiveTriples::LocalName::Minter.generate_local_name(DummyResource) }.to raise_error(RuntimeError, 'Requires base_uri to be defined in for_class.')
+    context "when one or more arguments are invalid" do
+#      def self.generate_local_name(for_class, max_tries=10, *minter_args, &minter_block)
+
+      context "and all arguments are missing" do
+        it "should raise error" do
+          expect{ ActiveTriples::LocalName::Minter.generate_local_name() }.
+              to raise_error(ArgumentError, 'wrong number of arguments (0 for 1)')
+        end
       end
+
+      context "and max_tries is negative" do
+        it "should raise error" do
+          expect{ ActiveTriples::LocalName::Minter.generate_local_name(DummyResource,-1) }.
+              to raise_error(ArgumentError, 'Argument max_tries must be >= 1 if passed in')
+        end
+      end
+
+      context "and class doesn't inherit from ActiveTriples::Resource" do
+        before do
+          class DummyNonResource
+          end
+        end
+        after do
+          Object.send(:remove_const, "DummyNonResource") if Object
+        end
+
+        it "should raise error" do
+          expect{ ActiveTriples::LocalName::Minter.generate_local_name(DummyNonResource) }.
+              to raise_error(ArgumentError, 'Argument for_class must inherit from ActiveTriples::Resource')
+        end
+      end
+
+
+      context "and class doesn't have base_uri defined" do
+        it "should raise error" do
+          expect{ ActiveTriples::LocalName::Minter.generate_local_name(DummyResource) }.
+              to raise_error(RuntimeError, 'Requires base_uri to be defined in for_class.')
+        end
+      end
+
+      ## TODO: Can't see how to test this.  The test complains if I pass anything other than a Proc instead of complaining that the passing in thing isn't callable.
+      # context "block isn't callable" do
+      #   it "should raise error" do
+      #     x = "foo"
+      #     expect{ ActiveTriples::LocalName::Minter.generate_local_name(DummyResourceWithBaseURI,10,{:prefix => 'a'},&x) }.
+      #         to raise_error(ArgumentError, 'Invalid minter_block.')
+      #   end
+      # end
     end
 
     context "when all IDs available" do
