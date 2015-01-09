@@ -5,3 +5,5 @@ Gemfile.lock
 tmp/*
 .sass-cache
 .idea
+.ruby-gemset
+.ruby-version
