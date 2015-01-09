@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/ActiveTriples/active_triples-local_name.png?branch=master)](https://travis-ci.org/ActiveTriples/active_triples-local_name)
 [![Coverage Status](https://coveralls.io/repos/ActiveTriples/active_triples-local_name/badge.png?branch=setup_coveralls)](https://coveralls.io/r/ActiveTriples/active_triples-local_name?branch=setup_coveralls)
-[![Dependency Status](https://www.versioneye.com/ruby/ActiveTriples-active_triples-local_name/0.0.4/badge.svg)](https://www.versioneye.com/ruby/ActiveTriples-active_triples-local_name/0.0.4)
+[![Gem Version](https://badge.fury.io/rb/active_triples-local_name.svg)](http://badge.fury.io/rb/active_triples-local_name)
 
 Provides utilities for working with local names under the [ActiveTriples](https://github.com/ActiveTriples/ActiveTriples) 
 framework.  Includes a default implementation of a local name minter.
