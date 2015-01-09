@@ -1,7 +1,7 @@
 # ActiveTriples::LocalName
 
-[![Build Status](https://travis-ci.org/ActiveTriples/active_triples-local_name.png?branch=master)](https://travis-ci.org/ActiveTriples/active_triples-local_name)
-[![Coverage Status](https://coveralls.io/repos/ActiveTriples/active_triples-local_name/badge.png?branch=setup_coveralls)](https://coveralls.io/r/ActiveTriples/active_triples-local_name?branch=setup_coveralls)
+[![Build Status](https://travis-ci.org/ActiveTriples/active_triples-local_name.png?branch=setup_badges)](https://travis-ci.org/ActiveTriples/active_triples-local_name)
+[![Coverage Status](https://coveralls.io/repos/ActiveTriples/active_triples-local_name/badge.png?branch=setup_badges)](https://coveralls.io/r/ActiveTriples/active_triples-local_name?branch=setup_badges)
 [![Gem Version](https://badge.fury.io/rb/active_triples-local_name.svg)](http://badge.fury.io/rb/active_triples-local_name)
 
 Provides utilities for working with local names under the [ActiveTriples](https://github.com/ActiveTriples/ActiveTriples) 
