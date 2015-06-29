@@ -14,10 +14,10 @@ Gem::Specification.new do |s|
   s.license     = "APACHE2"
   s.required_ruby_version     = '>= 1.9.3'
 
-  s.add_dependency('active-triples', '~> 0.7')
+  s.add_dependency('active-triples')
 
-  s.add_dependency('deprecation', '~> 0.1')
-  s.add_dependency('activesupport', '>= 3.0.0')
+  s.add_dependency('deprecation')
+  s.add_dependency('activesupport')
 
   s.add_development_dependency('rdoc')
   s.add_development_dependency('rspec')
