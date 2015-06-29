@@ -34,11 +34,13 @@ describe ActiveTriples::LocalName::Minter do
     subject {DummyResourceWithBaseURI.new('1')}
 
     before do
-      class DummyResource < ActiveTriples::Resource
+      class DummyResource
+        include  ActiveTriples::RDFSource
         configure :type => RDF::URI('http://example.org/SomeClass')
         property :title, :predicate => RDF::DC.title
       end
-      class DummyResourceWithBaseURI < ActiveTriples::Resource
+      class DummyResourceWithBaseURI
+        include  ActiveTriples::RDFSource
         configure :base_uri => "http://example.org",
                   :type => RDF::URI("http://example.org/SomeClass"),
                   :repository => :default
@@ -99,7 +101,7 @@ describe ActiveTriples::LocalName::Minter do
         end
       end
 
-      context "and class doesn't inherit from ActiveTriples::Resource" do
+      context "and class doesn't include module ActiveTriples::RDFSource" do
         before do
           class DummyNonResource
           end
@@ -110,7 +112,7 @@ describe ActiveTriples::LocalName::Minter do
 
         it "should raise error" do
           expect{ ActiveTriples::LocalName::Minter.generate_local_name(DummyNonResource) }.
-              to raise_error(ArgumentError, 'Argument for_class must inherit from ActiveTriples::Resource')
+              to raise_error(ArgumentError, 'Argument for_class must include module ActiveTriples::RDFSource')
         end
       end
 

@@ -10,7 +10,7 @@ module ActiveTriples
       # Generate a random localname that combined with a class' base_uri does not already exist in
       # registered triplestores.
       #
-      # @param [Class] the class inheriting from <tt>ActiveTriples::Reource</tt> whose configuration
+      # @param [Class] the class, which must include <tt>ActiveTriples::RDFSource</tt> module, whose configuration
       #   is used to generate the full URI for testing for uniqueness of the generated local name
       # @param [Integer] the maximum number of attempts to make a unique local name
       # @yieldparam the arguments to pass to the minter block (optional)
@@ -21,7 +21,7 @@ module ActiveTriples
       # @return [String] the generated local name
       #
       # @raise [ArgumentError] if maximum allowed tries is less than 0
-      # @raise [ArgumentError] if for_class does not inherit from ActiveTriples::Resources
+      # @raise [ArgumentError] if for_class does not include ActiveTriples::RDFSource module
       # @raise [ArgumentError] if minter_block is not a block (does not respond to call)
       # @raise [Exception] if for_class does not have base_uri configured
       # @raise [Exception] if an available local name is not found in the maximum allowed tries.
@@ -35,7 +35,7 @@ module ActiveTriples
       def self.generate_local_name(for_class, max_tries=10, *minter_args, &minter_block)
         raise ArgumentError, 'Argument max_tries must be >= 1 if passed in' if     max_tries    <= 0
 
-        raise ArgumentError, 'Argument for_class must inherit from ActiveTriples::Resource' unless for_class < ActiveTriples::Resource
+        raise ArgumentError, 'Argument for_class must include module ActiveTriples::RDFSource' unless for_class.included_modules.include?(ActiveTriples::RDFSource)
         raise 'Requires base_uri to be defined in for_class.' unless for_class.base_uri
 
         raise ArgumentError, 'Invalid minter_block.' if minter_block && !minter_block.respond_to?(:call)
