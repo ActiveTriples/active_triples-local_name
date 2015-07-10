@@ -109,7 +109,7 @@ describe ActiveTriples::LocalName::Minter do
         end
 
         it "should raise error" do
-          if( Object.const_defined?('ActiveTriples::RDFSource') )  # for ActiveTriples >= 0.7
+          if( ActiveTriples::LocalName.post_ActiveTriples_0_7? )  # for ActiveTriples >= 0.7
             err_msg = 'Argument for_class must inherit from ActiveTriples::Resource or include module ActiveTriples::RDFSource'
           else                                                     # for ActiveTriples < 0.7
             err_msg = 'Argument for_class must inherit from ActiveTriples::Resource'
@@ -448,7 +448,7 @@ describe ActiveTriples::LocalName::Minter do
 
   describe "test validation when ActiveTriples >= 0.7" do
     before do
-      if( Object.const_defined?('ActiveTriples::RDFSource') )  # Check that ActiveTriples >= 0.7
+      if( ActiveTriples::LocalName.post_ActiveTriples_0_7? )  # Check that ActiveTriples >= 0.7
         class DummyResourceInclude
           include  ActiveTriples::RDFSource
           configure :base_uri => "http://example.org",
@@ -458,13 +458,13 @@ describe ActiveTriples::LocalName::Minter do
       end
     end
     after do
-      if( Object.const_defined?('ActiveTriples::RDFSource') )  # Check that ActiveTriples >= 0.7
+      if( ActiveTriples::LocalName.post_ActiveTriples_0_7? )  # Check that ActiveTriples >= 0.7
         Object.send(:remove_const, "DummyResourceInclude") if Object
       end
     end
 
     it "should not raise error when including from ActiveTriples::RDFSource" do
-      unless( Object.const_defined?('ActiveTriples::RDFSource') )  # Supports ActiveTriples >= 0.7
+      unless( ActiveTriples::LocalName.post_ActiveTriples_0_7? )  # Supports ActiveTriples >= 0.7
         skip ('Cannot test include ActiveTriples::RDFSource when ActiveTriples < 0.7 installed')
       else
         expect{ ActiveTriples::LocalName::Minter.generate_local_name(DummyResourceInclude) }.

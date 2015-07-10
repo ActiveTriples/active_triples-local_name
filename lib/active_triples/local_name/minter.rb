@@ -35,7 +35,7 @@ module ActiveTriples
       def self.generate_local_name(for_class, max_tries=10, *minter_args, &minter_block)
         raise ArgumentError, 'Argument max_tries must be >= 1 if passed in' if     max_tries    <= 0
 
-        if( Object.const_defined?('ActiveTriples::RDFSource') )  # Supports ActiveTriples >= 0.7
+        if( ActiveTriples::LocalName.post_ActiveTriples_0_7? )  # Supports ActiveTriples >= 0.7
           raise ArgumentError, 'Argument for_class must inherit from ActiveTriples::Resource or include module ActiveTriples::RDFSource' unless
               ( for_class < ActiveTriples::Resource || for_class.included_modules.include?(ActiveTriples::RDFSource) )
         else                                                     # Supports ActiveTriples < 0.7
