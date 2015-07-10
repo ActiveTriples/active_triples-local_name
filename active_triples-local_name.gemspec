@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_dependency('activesupport')
 
   s.add_development_dependency('pry')
-  s.add_development_dependency('pry-byebug')
+  # s.add_development_dependency('pry-byebug')  # uncomment for ruby >= 2.0
   s.add_development_dependency('rdoc')
   s.add_development_dependency('rspec')
   s.add_development_dependency('coveralls')
