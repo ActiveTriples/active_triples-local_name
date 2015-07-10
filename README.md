@@ -4,8 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/ActiveTriples/active_triples-local_name/badge.png?branch=master)](https://coveralls.io/r/ActiveTriples/active_triples-local_name?branch=master)
 [![Gem Version](https://badge.fury.io/rb/active_triples-local_name.svg)](http://badge.fury.io/rb/active_triples-local_name)
 
-Provides utilities for working with local names under the [ActiveTriples](https://github.com/ActiveTriples/ActiveTriples) 
-framework.  Includes a default implementation of a local name minter.
+Provides utilities for working with local names under the [ActiveTriples](https://github.com/ActiveTriples/ActiveTriples) framework.  Includes a default implementation of a local name minter.
 
 
 ## Installation
@@ -60,15 +59,11 @@ localname = ActiveTriples::LocalName::Minter.generate_local_name(
 
 Parameter NOTES:
 * for_class = DummyResourceWithBaseURI - resource class must have base_uri configured
-* max_tries = 10 - If using default minter, it should easily find an available local name in 10 tries.  
-  If your minter algorithm gets lots of clashes with existing URIs and max_tries is set high, you may 
-  run into performance issues.
+* max_tries = 10 - If using default minter, it should easily find an available local name in 10 tries.
+  If your minter algorithm gets lots of clashes with existing URIs and max_tries is set high, you may run into performance issues.
 * minter_args (optional) = {:prefix=>'d'} - The default minter takes a single hash argument.  You can
   define minters that take no arguments, multiple arguments, or a multiple item hash argument.
-* minter_block = nil - When minter_block is not passed in, the default minter algorithm, which produces
-  a UUID, will be used.  Best practice is to start local names with an alpha character.  UUIDs generate 
-  with either an alpha or numeric as the first character. Passing in a prefix of 'd' forces the local 
-  name to start with the character 'd'.
+* minter_block = nil - When minter_block is not passed in, the default minter algorithm, which produces a UUID, will be used.  Best practice is to start local names with an alpha character.  UUIDs generate with either an alpha or numeric as the first character. Passing in a prefix of 'd' forces the local name to start with the character 'd'.
 
 
 #### Example: Passing in a block as minter
