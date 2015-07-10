@@ -109,11 +109,20 @@ describe ActiveTriples::LocalName::Minter do
         end
 
         it "should raise error" do
+          if( ActiveTriples::LocalName.post_ActiveTriples_0_7? )  # for ActiveTriples >= 0.7
+            err_msg = 'Argument for_class must inherit from ActiveTriples::Resource or include module ActiveTriples::RDFSource'
+          else                                                     # for ActiveTriples < 0.7
+            err_msg = 'Argument for_class must inherit from ActiveTriples::Resource'
+          end
           expect{ ActiveTriples::LocalName::Minter.generate_local_name(DummyNonResource) }.
-              to raise_error(ArgumentError, 'Argument for_class must inherit from ActiveTriples::Resource')
+              to raise_error(ArgumentError, err_msg)
+        end
+
+        it "should not raise error when inheriting from ActiveTriples::Resource" do
+          expect{ ActiveTriples::LocalName::Minter.generate_local_name(DummyResourceWithBaseURI) }.
+              not_to raise_error
         end
       end
-
 
       context "and class doesn't have base_uri defined" do
         it "should raise error" do
@@ -433,6 +442,33 @@ describe ActiveTriples::LocalName::Minter do
           expect(id.length).to eq 36
           expect(id).to match /[a-zA-Z0-9]{8}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{4}-[a-zA-Z0-9]{12}/
         end
+      end
+    end
+  end
+
+  describe "test validation when ActiveTriples >= 0.7" do
+    before do
+      if( ActiveTriples::LocalName.post_ActiveTriples_0_7? )  # Check that ActiveTriples >= 0.7
+        class DummyResourceInclude
+          include  ActiveTriples::RDFSource
+          configure :base_uri => "http://example.org",
+                    :type => RDF::URI('http://example.org/SomeClass')
+          property :title, :predicate => RDF::DC.title
+        end
+      end
+    end
+    after do
+      if( ActiveTriples::LocalName.post_ActiveTriples_0_7? )  # Check that ActiveTriples >= 0.7
+        Object.send(:remove_const, "DummyResourceInclude") if Object
+      end
+    end
+
+    it "should not raise error when including from ActiveTriples::RDFSource" do
+      unless( ActiveTriples::LocalName.post_ActiveTriples_0_7? )  # Supports ActiveTriples >= 0.7
+        skip ('Cannot test include ActiveTriples::RDFSource when ActiveTriples < 0.7 installed')
+      else
+        expect{ ActiveTriples::LocalName::Minter.generate_local_name(DummyResourceInclude) }.
+          not_to raise_error
       end
     end
   end
